@@ -3,10 +3,10 @@ import MainScreen from "../main_screen/MainScreen";
 
 const ScreenBody = () => {
   return (
-    <>
+    <div className="inner-wrapper">
       <LeftMenu />
       <MainScreen />
-    </>
+    </div>
   )
 }
 

@@ -7,7 +7,9 @@ import './index.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ScreenHeader />
-    <ScreenBody />
+    <section className="body">
+      <ScreenHeader />
+      <ScreenBody />
+    </section>
   </StrictMode>,
 )

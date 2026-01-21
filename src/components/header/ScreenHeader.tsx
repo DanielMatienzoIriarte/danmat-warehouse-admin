@@ -8,7 +8,7 @@ const ScreenHeader =() => {
     <header className="header">
       <div className="logo-container">
         <a href="../" className="logo">
-          <img src={logo} height="35" alt="DanMat Warehouse" />
+          <img src={ logo } height="35" alt="DanMat Warehouse" />
         </a>
         <div className="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
           <i className="fa fa-bars" aria-label="Toggle sidebar"></i>
