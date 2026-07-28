@@ -1,10 +1,14 @@
 import React from 'react';
 
-export default function MainScreen() {
+interface PageContainerProps {
+  children?: React.ReactNode;
+  className?: string;
+}
+const MainScreen = ({ children, className = '' }: PageContainerProps) => {
   //const [count, setCount] = useState(0)
 
   return (
-    <section role="main" className="content-body">
+    <section role="main" className={`content-body ${className}`}>
       <header className="page-header">
         <h2>Dashboard</h2>
       
@@ -68,7 +72,7 @@ export default function MainScreen() {
                       Sales:
                       <strong>
                         <select className="form-control" id="salesSelector">
-                          <option value="JSOFT Admin" selected>JSOFT Admin</option>
+                          <option value="JSOFT Admin">JSOFT Admin</option>
                           <option value="JSOFT Drupal" >JSOFT Drupal</option>
                           <option value="JSOFT Wordpress" >JSOFT Wordpress</option>
                         </select>
@@ -656,4 +660,6 @@ export default function MainScreen() {
       </div>
     </section>
   )
-}
+};
+
+export default MainScreen;

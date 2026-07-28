@@ -1,9 +1,12 @@
 import React from 'react';
 import logo from '/imgs/logo.png?url';
+import HeaderDropdown from './HeaderDropdown';
 
-const ScreenHeader =() => {
-  //const [count, setCount] = useState(0)
+interface ScreenHeaderProps {
+  user: { email: string } | null;
+}
 
+const ScreenHeader =(user: ScreenHeaderProps) => {
   return (
     <header className="header">
       <div className="logo-container">
@@ -121,7 +124,7 @@ const ScreenHeader =() => {
                       <figure className="image">
                         <img src="assets/images/!sample-user.jpg" alt="Joseph Junior" className="img-circle" />
                       </figure>
-                      <span className="title">Joseph Junior</span>
+                      <span className="title">PEDRO PEREZ</span>
                       <span className="message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet lacinia orci. Proin vestibulum eget risus non luctus. Nunc cursus lacinia lacinia. Nulla molestie malesuada est ac tincidunt. Quisque eget convallis diam.</span>
                     </a>
                   </li>
@@ -190,34 +193,7 @@ const ScreenHeader =() => {
     
         <span className="separator"></span>
     
-        <div id="userbox" className="userbox">
-          <a href="#" data-toggle="dropdown">
-            <figure className="profile-picture">
-              <img src="assets/images/!logged-user.jpg" alt="Joseph Doe" className="img-circle" data-lock-picture="assets/images/!logged-user.jpg" />
-            </figure>
-            <div className="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@JSOFT.com">
-              <span className="name">John Doe Junior</span>
-              <span className="role">administrator</span>
-            </div>
-    
-            <i className="fa custom-caret"></i>
-          </a>
-    
-          <div className="dropdown-menu">
-            <ul className="list-unstyled">
-              <li className="divider"></li>
-              <li>
-                <a role="menuitem" href="pages-user-profile.html"><i className="fa fa-user"></i> My Profile</a>
-              </li>
-              <li>
-                <a role="menuitem" href="#" data-lock-screen="true"><i className="fa fa-lock"></i> Lock Screen</a>
-              </li>
-              <li>
-                <a role="menuitem" href="pages-signin.html"><i className="fa fa-power-off"></i> Logout</a>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <HeaderDropdown user_email={user.user?.email || 'Guest'} />
       </div>
     </header>
   )

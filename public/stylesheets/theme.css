@@ -5066,6 +5066,7 @@ html.header-dark .notifications > li .notification-icon i {
 	top: -10px;
 	width: 100%;
 	z-index: 992;
+	display: block;
 }
 
 .userbox.open .dropdown-menu li {
