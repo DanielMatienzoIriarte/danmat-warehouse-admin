@@ -1,13 +1,12 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { UseAuth } from "../../../context/AuthContext";
 
-interface UserMenuProps {
-  user_email: string;
-};
-
-const HeaderDropdown = ({ user_email }: UserMenuProps) => {
+const HeaderDropdown = ({ user_email }: { user_email: string }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const dropDownRef = useRef<HTMLDivElement>(null);
-
+  const { logout } = UseAuth();
+console.log('email3', user_email);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
 
@@ -19,6 +18,27 @@ const HeaderDropdown = ({ user_email }: UserMenuProps) => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  const handleToggle = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsOpen((prev) => !prev);
+  }, []);
+
+  const handleLogout = useCallback(async(e: React.MouseEvent) => {
+    e.preventDefault();
+    if (isLoggingOut) {
+      return;
+    }
+
+    try {
+      setIsLoggingOut(true);
+      setIsOpen(false);
+
+      await logout();
+    } catch (err) {
+      setIsLoggingOut(false);
+    }
+  }, [logout, isLoggingOut]);
 
   return (
     <div ref={dropDownRef} id="userbox" className={`userbox ${isOpen ? 'open' : ''}`}>
@@ -33,8 +53,8 @@ const HeaderDropdown = ({ user_email }: UserMenuProps) => {
         </figure>
 
         <div className="profile-info" data-lock-name={`${user_email}`} data-lock-email={`${user_email}`}>
-          <span className="name">{user_email}</span>
-          <span className="role">administrator</span>
+          <span className="name">{`${user_email}`}</span>
+          <span className="role">{`${user_email}`}</span>
         </div>
 
         <i className="fa custom-caret"></i>
@@ -56,10 +76,16 @@ const HeaderDropdown = ({ user_email }: UserMenuProps) => {
             </a>
           </li>
           <li>
-            <a role="menuitem" href="pages-signin.html">
+            <button
+              type="button"
+              role="menuitem"
+              onClick={handleLogout}
+              disabled={isLoggingOut}
+              style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left', cursor: 'pointer', padding: 0 }}
+            >
               <i className="fa fa-power-off"></i>
-              Logout
-            </a>
+              {isLoggingOut ? 'Logging out...' : 'Logout'}
+            </button>
           </li>
         </ul>
       </div>

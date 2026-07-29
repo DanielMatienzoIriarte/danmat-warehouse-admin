@@ -2,11 +2,8 @@ import React from 'react';
 import logo from '/imgs/logo.png?url';
 import HeaderDropdown from './HeaderDropdown';
 
-interface ScreenHeaderProps {
-  user: { email: string } | null;
-}
-
-const ScreenHeader =(user: ScreenHeaderProps) => {
+const ScreenHeader = ({ user_email }: { user_email: string }) => {
+  console.log('email2', user_email);
   return (
     <header className="header">
       <div className="logo-container">
@@ -97,7 +94,7 @@ const ScreenHeader =(user: ScreenHeaderProps) => {
                       <figure className="image">
                         <img src="assets/images/!sample-user.jpg" alt="Joseph Doe Junior" className="img-circle" />
                       </figure>
-                      <span className="title">Joseph Doe</span>
+                      <span className="title"></span>
                       <span className="message">Lorem ipsum dolor sit.</span>
                     </a>
                   </li>
@@ -193,7 +190,7 @@ const ScreenHeader =(user: ScreenHeaderProps) => {
     
         <span className="separator"></span>
     
-        <HeaderDropdown user_email={user.user?.email || 'Guest'} />
+        <HeaderDropdown user_email={user_email} />
       </div>
     </header>
   )

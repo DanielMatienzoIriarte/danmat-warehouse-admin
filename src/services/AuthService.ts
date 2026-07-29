@@ -79,7 +79,9 @@ export const AuthService = {
 
   logout: async () => {
     try {
-      await authApi.post('/logout');
+      await api.post('/logout');
+    }catch (err) {
+      console.error("Logout request failed:", err);
     } finally {
       setMemoryAccessToken(null);
     }

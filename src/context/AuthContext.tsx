@@ -35,10 +35,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const userData = await AuthService.me();
 
       updateAuthState({ 
-          isAuthenticated: true, 
-          isLoading: false,
-          user: userData
-        });
+        isAuthenticated: true, 
+        isLoading: false,
+        user: userData,
+      });
     } catch (err) {
       console.error("Auth check failed:", err);
       updateAuthState({ isAuthenticated: false, isLoading: false, user: null });
