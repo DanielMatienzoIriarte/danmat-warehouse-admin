@@ -44,7 +44,11 @@ api.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const refreshResponse = await api.post('/refresh');
+        const refreshResponse = await api.post('/refresh', {}, {
+          headers: {
+            Authorization: memoryAccessToken ? `Bearer ${memoryAccessToken}` : undefined
+          }
+        });
         const authHeader = refreshResponse.headers['authorization'] || refreshResponse.headers['x-access-token'];
 
         if (authHeader) {
@@ -95,7 +99,11 @@ export const AuthService = {
 
   refreshToken: async (): Promise<boolean> => {
   try {
-    const response = await authApi.post('/refresh');
+    const response = await authApi.post('/refresh', {}, {
+      headers: {
+        authorization: memoryAccessToken ? `Bearer ${memoryAccessToken}` : undefined
+      }
+    });
     const authHeader = response.headers['authorization'] || response.headers['x-access-token'];
     
     if (authHeader) {
